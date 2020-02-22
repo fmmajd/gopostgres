@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  doc:
+    image: golang:1.13
+    volumes:
+      - .:/go/src/gopostgres
+    ports:
+      - 6060:6060
+    command: 'bash -c "cd src && go get golang.org/x/tools/cmd/godoc && echo http://localhost:6060/pkg/gopostgres && /go/bin/godoc -http=:6060"'
+
+  test_db:
+    image: postgres:12.1
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=test
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
