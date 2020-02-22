@@ -26,7 +26,7 @@ gopostgres.InitDB("database", "username", "password", "host", gopostgres.StdLogg
 ```
 
 ### Creating Postgres Objects
-***important note***: this package currently only works on tables with a serial primary key. support for other primary keys will be added later
+***important note***: currently, this package only works on tables with a serial primary key. support for other primary keys will be added later
 
 This package provides an interface for postgres objects. the interface goes like this:
 ```go
@@ -96,4 +96,16 @@ func (u User) PostgresValues() map[string]interface{} {
 func (u User) PostgresId() uint {
   return u.id
 }
+```
+
+### Where Objects
+In order to add conditions to the queries, you can use Where objects.
+Currently, There are two types of where helpers, but more will be added soon.
+
+```go
+//to produce a "where column like %string%" condition
+wehreLike := gopostgres.whereLike("column", "string")
+
+//to produce a "where column = value" condition
+wehreEquals := gopostgres.whereEquals("column", "value")
 ```
