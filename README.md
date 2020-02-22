@@ -110,6 +110,15 @@ wehreLike := gopostgres.whereLike("column", "string")
 wehreEquals := gopostgres.whereEquals("column", "value")
 ```
 
+### FindBy
+To find a single row via a unique column value, you can use FindBy function:
+```go
+val, err := gopostgres.DB.FindBy("record_table", "column", "value")
+```
+Remember that FindBy is used when you want ONLY one row, so if more than one row is found, a MoreThanOneRecordFound error will be returned.
+And if no row is found, a NoRecordFound error would be returned. 
+
+
 ### Errors
 Some specific errors can be returned from query functions:
 
