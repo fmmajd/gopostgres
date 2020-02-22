@@ -109,3 +109,9 @@ wehreLike := gopostgres.whereLike("column", "string")
 //to produce a "where column = value" condition
 wehreEquals := gopostgres.whereEquals("column", "value")
 ```
+
+### Errors
+Some specific errors can be returned from query functions:
+
+- `NoRecordFound` This error returns when there was no result for your specific condition.
+- `MoreThanOneRecordFound` This error returns when the function is called to return ONE record, but more than one result is found. 
