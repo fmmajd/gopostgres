@@ -1,4 +1,4 @@
-[![](https://godoc.org/github.com/fmmajd/gopostgres?status.svg)](https://godoc.org/github.com/fmmajd/goevent)
+[![](https://godoc.org/github.com/fmmajd/gopostgres?status.svg)](https://godoc.org/github.com/fmmajd/gopostgres)
 
 # Semi-ORM for Postgres in GO
 
@@ -51,7 +51,7 @@ type Record interface {
 
 `PostgresId` Returns the ID of the row. can return 0, if the row has not been saved yet.
 
-example: 
+example:
 ```go
 type User struct {
   id uint
@@ -92,7 +92,7 @@ func (u User) PostgresValues() map[string]interface{} {
     "username": u.PostgresValue("username"),
     "email": u.PostgresValue("email"),
     "update_date": u.PostgresValue("update_date"),
-  }   
+  }
 }
 
 func (u User) PostgresId() uint {
@@ -112,7 +112,7 @@ example:
 err:= gopostgres.DB.Insert(rec)
 if err != nil {
   log.Fatalln(err)
-} 
+}
 ```
 
 ### Updating a record in the database
@@ -128,7 +128,7 @@ example:
 err:= gopostgres.DB.Insert(rec)
 if err != nil {
   log.Fatalln(err)
-} 
+}
 //..do things
 rec.IncreaseViewsBy(3)
 gopostgres.DB.Update(rec)
@@ -149,7 +149,7 @@ wehreEquals := gopostgres.whereEquals("column", "value")
 ### FindAllWhere
 To find ALL the rows via one or more where conditions, you can use the FindAllWhere function.
 
-The first argument is the table name, and the second is the list of columns you want to be selected. If you want all the columns to be returned, simply put "*" here. 
+The first argument is the table name, and the second is the list of columns you want to be selected. If you want all the columns to be returned, simply put "*" here.
 
 example:
 ```go
@@ -166,16 +166,16 @@ To find a single row via a unique column value, you can use FindBy function:
 val, err := gopostgres.DB.FindBy("record_table", "column", "value")
 ```
 Remember that FindBy is used when you want ONLY one row, so if more than one row is found, a MoreThanOneRecordFound error will be returned.
-And if no row is found, a NoRecordFound error would be returned. 
+And if no row is found, a NoRecordFound error would be returned.
 
-To fetch more than one row, you can use the function `FindAllBy`. 
+To fetch more than one row, you can use the function `FindAllBy`.
 
 ### FindAllBy
 To find ALL the rows via a column's value, you can use FindAllBy function:
 ```go
 val, err := gopostgres.DB.FindAllBy("record_table", "column", "value")
 ```
-If no row is found, a NoRecordFound error would be returned. 
+If no row is found, a NoRecordFound error would be returned.
 
 
 ### Errors
@@ -186,5 +186,5 @@ Some specific errors can be returned from query functions:
 
 ## Tests
 
-This package does not have a 100% test coverage yet. Tread with caution. 
+This package does not have a 100% test coverage yet. Tread with caution.
 functions without tests: FindAllWhere, Insert, Update
