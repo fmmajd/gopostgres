@@ -118,6 +118,15 @@ val, err := gopostgres.DB.FindBy("record_table", "column", "value")
 Remember that FindBy is used when you want ONLY one row, so if more than one row is found, a MoreThanOneRecordFound error will be returned.
 And if no row is found, a NoRecordFound error would be returned. 
 
+To fetch more tahn one row, you can use the function `FindAllBy`. 
+
+### FindAllBy
+To find ALL the rows via a column's value, you can use FindAllBy function:
+```go
+val, err := gopostgres.DB.FindAllBy("record_table", "column", "value")
+```
+If no row is found, a NoRecordFound error would be returned. 
+
 
 ### Errors
 Some specific errors can be returned from query functions:
