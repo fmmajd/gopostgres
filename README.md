@@ -113,6 +113,25 @@ if err != nil {
 } 
 ```
 
+### Updating a record in the database
+To update a record in the database, you can call the function Update and pass the record as an argument.
+
+***important note*** the function PostgresId() MUST return non-zero for the records that are being updated,
+ otherwise a UpdatingRecordWithZeroId error would be returned.
+
+example:
+```go
+//...
+//rec is previously populated
+err:= gopostgres.DB.Insert(rec)
+if err != nil {
+  log.Fatalln(err)
+} 
+//..do things
+rec.IncreaseViewsBy(3)
+gopostgres.DB.Update(rec)
+```
+
 ### Where Objects
 In order to add conditions to the queries, you can use Where objects.
 Currently, There are two types of where helpers, but more will be added soon.

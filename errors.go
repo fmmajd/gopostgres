@@ -4,6 +4,7 @@ const (
 	noRecordFoundMessage = "no record was found"
 	moreThanOneRecordFoundMessage = "more than one record was found"
 	NewRecordWithUnZeroIdMessage = "new records must have an id of zero"
+	UpdatingRecordWithZeroIdMessage = "updating records must have a non-zero id"
 )
 
 //Is returned when no record is found for a specific query
@@ -27,4 +28,11 @@ type NewRecordWithUnZeroId struct {
 
 func (e NewRecordWithUnZeroId) Error() string {
 	return NewRecordWithUnZeroIdMessage
+}
+
+type UpdatingRecordWithZeroId struct {
+}
+
+func (e UpdatingRecordWithZeroId) Error() string {
+	return UpdatingRecordWithZeroIdMessage
 }
