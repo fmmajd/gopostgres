@@ -1,8 +1,8 @@
 [![](https://godoc.org/github.com/fmmajd/gopostgres?status.svg)](https://godoc.org/github.com/fmmajd/goevent)
 
-# Semi-ORM for postgres in GO
+# Semi-ORM for Postgres in GO
 
-this package is an attempt to have the minimum requirements of an orm for postgres and go-based apps
+this package is an attempt to have the minimum requirements of an ORM for Postgres and go-based apps
 
 ## How to install
 ```bash
@@ -30,14 +30,14 @@ gopostgres.InitDB("database", "username", "password", "host", gopostgres.StdLogg
 ### Creating Postgres Objects
 ***important note***: currently, this package only works on tables with a serial primary key. support for other primary keys will be added later
 
-This package provides an interface for postgres objects. the interface goes like this:
+This package provides an interface for Postgres objects. the interface goes like this:
 ```go
 type Record interface {
-	PostgresTable() string
-	PostgresColumns() []string
-	PostgresValue(column string) interface{}
-	PostgresValues() map[string]interface{}
-	PostgresId() uint
+   PostgresTable() string
+   PostgresColumns() []string
+   PostgresValue(column string) interface{}
+   PostgresValues() map[string]interface{}
+   PostgresId() uint
 }
 ```
 
@@ -45,7 +45,7 @@ type Record interface {
 
 `PostgresColumns` A slice of strings containing all the column names of that table.
 
-`PostgresValue` Returns value of each column, can return nil.
+`PostgresValue` Returns the value of each column, can return nil.
 
 `PostgresValues` Returns a map of columns for insert and update queries. Remember not to include the column "id" here.
 
@@ -103,7 +103,7 @@ func (u User) PostgresId() uint {
 ### Inserting a new record in the database
 When you have populated a record and want to insert it into the database, you can call the function Insert and pass the record as an argument.
 
-***important note*** the function PostgresId() MUST return 0 for the records that are not yet saved in the database, otherwise a NewRecordWithUnZeroId error would be returned.
+***important note*** the function PostgresId() MUST return 0 for the records that are not yet saved in the database, otherwise, a NewRecordWithUnZeroId error would be returned.
 
 example:
 ```go
@@ -147,9 +147,9 @@ wehreEquals := gopostgres.whereEquals("column", "value")
 ```
 
 ### FindAllWhere
-To find ALL the rows via a one or more where conditions, you can use FindAllWhere function.
+To find ALL the rows via one or more where conditions, you can use the FindAllWhere function.
 
-The first argument is the table name, and secon d is the list of columns you want selected. If you want all the columns to be returned, simply put "*" here. 
+The first argument is the table name, and the second is the list of columns you want to be selected. If you want all the columns to be returned, simply put "*" here. 
 
 example:
 ```go
