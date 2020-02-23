@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func TestMain(m *testing.M) {
+func TestFindBy(t *testing.T) {
 	InitDB("test", "user", "pass", "localhost", nil, pgx.LogLevelDebug)
 	tableExists, _ := DB.tableExists(testTable)
 	if tableExists {
@@ -21,10 +21,6 @@ func TestMain(m *testing.M) {
 		}
 		DB.execQuery(createTestTableQuery)
 	}
-	m.Run()
-}
-
-func TestFindBy(t *testing.T) {
 	testUsername := "username1"
 	testUpdateTime := time.Date(2000, 1, 1, 13, 10, 20, 0, time.UTC)
 	//No record should be found first
