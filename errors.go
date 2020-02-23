@@ -3,6 +3,7 @@ package gopostgres
 const (
 	noRecordFoundMessage = "no record was found"
 	moreThanOneRecordFoundMessage = "more than one record was found"
+	NewRecordWithUnZeroIdMessage = "new records must have an id of zero"
 )
 
 //Is returned when no record is found for a specific query
@@ -19,4 +20,11 @@ type MoreThanOneRecordFound struct {
 
 func( e MoreThanOneRecordFound) Error() string {
 	return moreThanOneRecordFoundMessage
+}
+
+type NewRecordWithUnZeroId struct {
+}
+
+func (e NewRecordWithUnZeroId) Error() string {
+	return NewRecordWithUnZeroIdMessage
 }

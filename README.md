@@ -98,6 +98,21 @@ func (u User) PostgresId() uint {
 }
 ```
 
+### Inserting a new record in the database
+When you have populated a record and want to insert it into the database, you can call the function Insert and pass the record as an argument.
+
+***important note*** the function PostgresId() MUST return 0 for the records that are not yet saved in the database, otherwise a NewRecordWithUnZeroId error would be returned.
+
+example:
+```go
+//...
+//rec is previously populated
+err:= gopostgres.DB.Insert(rec)
+if err != nil {
+  log.Fatalln(err)
+} 
+```
+
 ### Where Objects
 In order to add conditions to the queries, you can use Where objects.
 Currently, There are two types of where helpers, but more will be added soon.
@@ -122,6 +137,7 @@ whereRatingHigh := gopostgres.WhereEquals("rating", "5")
 val, err := gopostgres.DB.FindAllWhere("movies", []string{"title", "rating","publish_year"}, whereTitleLikeRings, whereRatingHigh)
 ```
 If no row is found, a NoRecordFound error would be returned.
+***important note*** This package only reports AND conditions for now.
 
 ### FindBy
 To find a single row via a unique column value, you can use FindBy function:
@@ -150,3 +166,4 @@ Some specific errors can be returned from query functions:
 ## Tests
 
 This package does not have a 100% test coverage yet. Tread with caution. 
+functions without tests: FindAllWhere, Insert, Update
