@@ -1,6 +1,7 @@
 package gopostgres
 
-var testTableForFindBy = "testing"
+var testTableForFindBy = "testing1"
+var testTableForFindAllBy = "testing2"
 
 var createTestTable = "CREATE TABLE IF NOT EXISTS %s"+
 	"(id bigserial primary key," +
