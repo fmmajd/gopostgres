@@ -1,6 +1,7 @@
 package gopostgres
 
 import (
+	"fmt"
 	"github.com/jackc/pgx/v4"
 	"reflect"
 	"testing"
@@ -9,22 +10,22 @@ import (
 
 func TestFindBy(t *testing.T) {
 	InitDB("test", "user", "pass", "localhost", nil, pgx.LogLevelDebug)
-	tableExists, _ := DB.tableExists(testTable)
+	tableExists, _ := DB.tableExists(testTableForFindBy)
 	if tableExists {
 		purgeTableQuery := query{
-			Statement: truncateTestTable,
+			Statement: fmt.Sprintf(truncateTestTable, testTableForFindBy),
 		}
 		DB.execQuery(purgeTableQuery)
 	} else {
 		createTestTableQuery := query{
-			Statement: createTestTable,
+			Statement: fmt.Sprintf(createTestTable, testTableForFindBy),
 		}
 		DB.execQuery(createTestTableQuery)
 	}
 	testUsername := "username1"
 	testUpdateTime := time.Date(2000, 1, 1, 13, 10, 20, 0, time.UTC)
 	//No record should be found first
-	res, err := DB.FindBy(testTable, "username", testUsername)
+	res, err := DB.FindBy(testTableForFindBy, "username", testUsername)
 	if err == nil {
 		t.Error("Expected an error, got nothing")
 	}else {
@@ -41,7 +42,7 @@ func TestFindBy(t *testing.T) {
 
 	//now we insert a single record
 	insertQuery := query{
-		Statement: insertOneRowInTestTable,
+		Statement: fmt.Sprintf(insertOneRowInTestTable, testTableForFindBy),
 		Args: []interface{} {
 			testUsername,
 			testUpdateTime,
@@ -50,7 +51,7 @@ func TestFindBy(t *testing.T) {
 	DB.execQuery(insertQuery)
 
 	//the single record should be found
-	res, err = DB.FindBy(testTable, "username", testUsername)
+	res, err = DB.FindBy(testTableForFindBy, "username", testUsername)
 	if err != nil {
 		t.Errorf("Expected to get no error, got %s", err.Error())
 	}
@@ -65,7 +66,7 @@ func TestFindBy(t *testing.T) {
 
 	insertQuery.Args = []interface{}{"username2", testUpdateTime}
 	DB.execQuery(insertQuery)
-	res, err = DB.FindBy(testTable, "last_updated", testUpdateTime)
+	res, err = DB.FindBy(testTableForFindBy, "last_updated", testUpdateTime)
 	if err == nil {
 		t.Error("Expected an error, got nothing")
 	}else {

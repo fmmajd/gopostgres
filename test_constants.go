@@ -1,12 +1,12 @@
 package gopostgres
 
-var testTable = "testing"
+var testTableForFindBy = "testing"
 
-var createTestTable = "CREATE TABLE IF NOT EXISTS "+testTable+
+var createTestTable = "CREATE TABLE IF NOT EXISTS %s"+
 	"(id bigserial primary key," +
 	"username varchar not null unique," +
 	"last_updated timestamp default now());"
 
-var truncateTestTable = "truncate table testing"
+var truncateTestTable = "truncate table %s"
 
-var insertOneRowInTestTable = "insert into "+testTable+" (username, last_updated) values ($1, $2)"
+var insertOneRowInTestTable = "insert into %s (username, last_updated) values ($1, $2)"
