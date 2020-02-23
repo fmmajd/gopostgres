@@ -5,7 +5,9 @@
 this package is an attempt to have the minimum requirements of an orm for postgres and go-based apps
 
 ## How to install
-LATER
+```bash
+go get -u github.com/fmmajd/gopostgres@v0.0.1
+```
 
 # Important Note
 This package uses the package:[github.com/jackc/pgx](github.com/jackc/pgx) underneath
