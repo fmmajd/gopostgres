@@ -7,7 +7,7 @@ import (
 
 //This function saves a new record in the database.
 //IMPORTANT: new records MUST return 0 for function PostgresId(), otherwise a  NewRecordWithUnZeroId error would return
-func (db Postgres) Insert(r Record) (int64, error) {
+func (db Postgres) Insert(r Record) (uint, error) {
 	if r.PostgresId() != 0 {
 		return 0, NewRecordWithUnZeroId{}
 	}
@@ -39,6 +39,7 @@ func (db Postgres) Insert(r Record) (int64, error) {
 		return 0, err
 	}
 	id := res[0][0]
+	idUint := uint(id.(int64))
 
-	return id.(int64), nil
+	return idUint, nil
 }
