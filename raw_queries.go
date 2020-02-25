@@ -10,6 +10,6 @@ var querySelectWithOneWhere = "select %s from %s where %s = $1"
 
 var querySelectWithoutWheres = "select %s from %s"
 
-var queryInsert = "insert into %s (%s) values (%s)"
+var queryInsert = "insert into %s (%s) values (%s) returning id"
 
 var queryUpdate = "update %s set %s where %s"
