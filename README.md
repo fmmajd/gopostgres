@@ -6,7 +6,7 @@ this package is an attempt to have the minimum requirements of an ORM for Postgr
 
 ## How to install
 ```bash
-go get -u github.com/fmmajd/gopostgres@v0.0.1
+go get -u github.com/fmmajd/gopostgres@v0.0.2
 ```
 
 # Important Note
@@ -103,16 +103,19 @@ func (u User) PostgresId() uint {
 ### Inserting a new record in the database
 When you have populated a record and want to insert it into the database, you can call the function Insert and pass the record as an argument.
 
+The insert function's first return parameter is the newly-created object's id. Do not forget to save it.
+
 ***important note*** the function PostgresId() MUST return 0 for the records that are not yet saved in the database, otherwise, a NewRecordWithUnZeroId error would be returned.
 
 example:
 ```go
 //...
 //rec is previously populated
-err:= gopostgres.DB.Insert(rec)
+id, err:= gopostgres.DB.Insert(rec)
 if err != nil {
   log.Fatalln(err)
 }
+rec.Id = id
 ```
 
 ### Updating a record in the database
