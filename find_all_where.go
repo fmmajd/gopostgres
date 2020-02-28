@@ -14,7 +14,7 @@ func (db Postgres) FindAllWhere(tableName string, columns []string, conditions .
 		whereStatement := ""
 		for i,w := range conditions {
 			if i!= 0 {
-				whereStatement += " and"
+				whereStatement += " and "
 			}
 			whereStatement += fmt.Sprintf("%s %s $%d", w.column, w.operation, i+1)
 			params = append(params, w.value)
