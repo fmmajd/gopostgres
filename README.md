@@ -6,7 +6,7 @@ this package is an attempt to have the minimum requirements of an ORM for Postgr
 
 ## How to install
 ```bash
-go get -u github.com/fmmajd/gopostgres@v0.0.2
+go get -u github.com/fmmajd/gopostgres@v0.0.3
 ```
 
 # Important Note
